@@ -1,22 +1,19 @@
 <?php
-namespace Database;
 
 class Database {
-    private function __construct(
+    public function __construct(
         private string $host,
         private string $name,
         private string $user,
         private string $password
     ) {}
 
-    public function getConnection:()
+    public function getConnection(): PDO
     {
-        $dsn = 'mysql:host=localhost;dbname=testdb';
-        $username = 'root';
-        $password = 'root';
+        $dsn = "mysql:host={$this->host};dbname={$this->name}";
 
         try {
-            $pdo = new PDO($dsn, $username, $password);
+            $pdo = new PDO($dsn, $this->user, $this->password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');

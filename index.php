@@ -2,11 +2,18 @@
 
 require 'vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use Elastic\Elasticsearch\ClientBuilder;
 
-// load env data
-$dotenv = Dotenv::createImmutable(dirname(__DIR__) . "/api");
+// Load the .env file
+$dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+// Init database connection
+$db = new Database($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+
+var_dump($db->getConnection());
+
 
 $client = Elastic\Elasticsearch\ClientBuilder::class;
 
@@ -38,6 +45,4 @@ $client = ClientBuilder::create()
 //print_r($response->asArray());
 //var_dump($response = $client->info());
 
-$db = new Database($client);
 
-var_dump($db);
