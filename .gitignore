@@ -13,3 +13,11 @@ composer.lock
 ### dotenv template
 .env
 
+### IDE
+.idea
+/.idea/
+.idea/codeception.xml
+.idea/elastic-php.iml
+.idea/php.xml
+.idea/phpspec.xml
+

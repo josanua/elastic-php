@@ -16,13 +16,20 @@ class Database {
             $pdo = new PDO($dsn, $this->user, $this->password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
-            $stmt->execute(['id' => 1]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            print_r($user);
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
+
+        return $pdo;
+    }
+
+    public function getAllRows()
+    {
+        $pdo = $this->getConnection();
+        $stmt = $pdo->prepare('SELECT * FROM articles');
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result;
     }
 }

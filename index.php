@@ -12,7 +12,8 @@ $dotenv->load();
 // Init database connection
 $db = new Database($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
 
-var_dump($db->getConnection());
+//var_dump($db->getConnection());
+dump($db->getAllRows());
 
 
 $client = Elastic\Elasticsearch\ClientBuilder::class;
